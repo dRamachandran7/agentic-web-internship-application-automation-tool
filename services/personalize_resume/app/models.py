@@ -30,8 +30,11 @@ class PersonalizeRequest(BaseModel):
 
 class PersonalizeResponse(BaseModel):
     """`resumeFile` is the compiled PDF, base64-encoded for JSON transport.
-    The orchestrator decodes it back into an in-memory buffer before passing
-    it to submit_application's setInputFiles() call."""
+    `resumeLatex` is the same personalized content as raw LaTeX source, so the
+    user can download either format or hand-edit the LaTeX themselves before
+    submitting the application manually."""
 
     resumeFile: str
     filename: str = "resume.pdf"
+    resumeLatex: str
+    latexFilename: str = "resume.tex"

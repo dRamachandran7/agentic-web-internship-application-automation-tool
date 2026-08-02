@@ -3,7 +3,7 @@
 Takes a scraped listing and makes one Groq LLM call (`llama-3.3-70b-versatile`,
 available on Groq's free tier) to extract the skills and values the employer
 is looking for. Second stage of the pipeline
-(`search_listings → analyze_listing → personalize_resume → submit_application`).
+(`search_listings → analyze_listing → personalize_resume`).
 Makes no Playwright calls of its own.
 
 ## Endpoint

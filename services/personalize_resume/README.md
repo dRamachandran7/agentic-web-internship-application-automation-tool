@@ -5,9 +5,13 @@ looking for (analyze_listing's output), makes one Groq call
 (`llama-3.3-70b-versatile`, available on Groq's free tier) to edit the LaTeX
 directly — rephrasing and reordering existing bullets/skills to foreground
 what the listing cares about, without inventing new experience — then
-compiles the result to PDF with Tectonic. Third stage of the pipeline
-(`search_listings → analyze_listing → personalize_resume → submit_application`).
-Makes no Playwright calls of its own.
+compiles the result to PDF with Tectonic. Third and final stage of the
+pipeline (`search_listings → analyze_listing → personalize_resume`). Makes no
+Playwright calls of its own, and there is no automated submission stage —
+apply forms vary too much across listings (different fields, some redirect
+to a different ATS entirely) to automate reliably, so this service just
+hands back the personalized resume in both formats for the user to download
+and submit themselves.
 
 An earlier version of this service parsed resumes into a fixed structured
 schema (contact/education/experience/... as separate JSON fields) and
@@ -47,13 +51,15 @@ it fails loudly (500) rather than silently shipping a broken PDF.
 // response
 {
   "resumeFile": "<base64-encoded PDF bytes>",
-  "filename": "resume.pdf"
+  "filename": "resume.pdf",
+  "resumeLatex": "\\documentclass[letterpaper,11pt]{article}\n...\\end{document}",
+  "latexFilename": "resume.tex"
 }
 ```
 
-`resumeFile` is base64-encoded for JSON transport. The orchestrator decodes
-it back into an in-memory buffer before passing it to `submit_application`'s
-`setInputFiles()` call.
+`resumeFile` is base64-encoded for JSON transport. The frontend offers both
+`resumeFile` (as a PDF download) and `resumeLatex` (as a `.tex` download) so
+the user can either submit the PDF as-is or hand-edit the LaTeX first.
 
 `GET /health` reports liveness and whether `GROQ_API_KEY` is configured.
 

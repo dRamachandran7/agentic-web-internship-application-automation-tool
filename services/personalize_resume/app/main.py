@@ -4,8 +4,9 @@ Exposes `POST /personalize-resume`. Takes the user's resume as raw LaTeX
 source and the `values` a listing is looking for (analyze_listing's output),
 makes one Groq call to edit the LaTeX directly — rephrasing/reordering
 existing content around those values without inventing new experience — then
-compiles the result to PDF with Tectonic. Makes no Playwright calls itself —
-that's submit_application's job.
+compiles the result to PDF with Tectonic. Returns both the LaTeX and the PDF
+so the user can download either and submit the application themselves; this
+is the last stage of the pipeline, there is no automated submission step.
 """
 
 from __future__ import annotations
@@ -40,4 +41,7 @@ async def personalize_resume(request: PersonalizeRequest) -> PersonalizeResponse
     except RenderError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
-    return PersonalizeResponse(resumeFile=base64.b64encode(pdf_bytes).decode("ascii"))
+    return PersonalizeResponse(
+        resumeFile=base64.b64encode(pdf_bytes).decode("ascii"),
+        resumeLatex=personalized_tex,
+    )

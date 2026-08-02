@@ -1,0 +1,148 @@
+# Runs the whole pipeline locally: frontend -> search_listings ->
+# analyze_listing -> personalize_resume.
+#
+#   cp .env.example .env      # fill in GROQ_API_KEY
+#   docker compose run --rm --service-ports auth    # one-time Handshake login
+#   docker compose up --build
+#
+# Deliberately a single-machine setup: the three backend services share one
+# SQLite file over a bind mount and the Handshake session lives on disk, both
+# of which assume one user on one host. See the deployment notes in README.md
+# before putting this anywhere multi-tenant.
+
+name: internship-automation
+
+services:
+  search_listings:
+    build:
+      context: ./services/search_listings
+      target: service
+    ports:
+      - "8001:8001"
+    environment:
+      HEADLESS: "true"
+      HANDSHAKE_BASE_URL: ${HANDSHAKE_BASE_URL:-https://app.joinhandshake.com}
+      NAV_TIMEOUT_MS: ${NAV_TIMEOUT_MS:-30000}
+      MAX_LISTINGS: ${MAX_LISTINGS:-25}
+    volumes:
+      # Shared SQLite store, same path the non-Docker setup uses.
+      - ./data:/srv/data
+      # Live session cookies. Read-only: only the auth service below writes here.
+      - ./services/search_listings/.auth:/srv/services/search_listings/.auth:ro
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health', timeout=3)
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      # Chromium is launched at startup, so give it room before the first probe.
+      start_period: 45s
+    restart: unless-stopped
+
+  analyze_listing:
+    build: ./services/analyze_listing
+    ports:
+      - "8002:8002"
+    environment:
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_MODEL: ${GROQ_MODEL:-llama-3.3-70b-versatile}
+    volumes:
+      - ./data:/srv/data
+    healthcheck:
+      # Also asserts the Groq key is configured, so a missing GROQ_API_KEY shows
+      # up as an unhealthy service at startup (and holds the frontend back)
+      # rather than as a 502 midway through a run.
+      test:
+        - CMD
+        - python
+        - -c
+        - import json,urllib.request,sys; sys.exit(0 if json.load(urllib.request.urlopen('http://127.0.0.1:8002/health', timeout=3))['groq_api_key_present'] else 1)
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  personalize_resume:
+    build: ./services/personalize_resume
+    ports:
+      - "8003:8003"
+    environment:
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_MODEL: ${GROQ_MODEL:-llama-3.3-70b-versatile}
+      COMPILE_TIMEOUT_S: ${COMPILE_TIMEOUT_S:-60}
+    volumes:
+      # Persists LaTeX packages Tectonic fetches beyond the ones baked into the
+      # image, so an unusual resume template only pays the download once.
+      - tectonic-cache:/home/appuser/.cache/Tectonic
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import json,urllib.request,sys; sys.exit(0 if json.load(urllib.request.urlopen('http://127.0.0.1:8003/health', timeout=3))['groq_api_key_present'] else 1)
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  frontend:
+    build: ./services/frontend
+    ports:
+      - "3000:3000"
+    environment:
+      # Service names on the compose network, not localhost.
+      SEARCH_LISTINGS_URL: http://search_listings:8001
+      ANALYZE_LISTING_URL: http://analyze_listing:8002
+      PERSONALIZE_RESUME_URL: http://personalize_resume:8003
+      REQUEST_TIMEOUT_MS: ${REQUEST_TIMEOUT_MS:-120000}
+    depends_on:
+      search_listings:
+        condition: service_healthy
+      analyze_listing:
+        condition: service_healthy
+      personalize_resume:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000').then(r => process.exit(r.ok ? 0 : 1), () => process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
+
+  # One-time interactive Handshake login. Not part of `up` (it's behind a
+  # profile) — run it on its own, and again whenever the scraper starts
+  # returning 401:
+  #
+  #   docker compose run --rm --service-ports auth
+  #
+  # It opens a real browser on a virtual display and streams it to
+  # http://localhost:7900/vnc.html?autoconnect=1&resize=scale so you can log in
+  # through your school's SSO/MFA by hand. --service-ports is what publishes
+  # 7900; `run` does not publish ports without it.
+  auth:
+    build:
+      context: ./services/search_listings
+      target: auth
+    profiles: ["auth"]
+    ports:
+      - "7900:7900"
+    environment:
+      HANDSHAKE_BASE_URL: ${HANDSHAKE_BASE_URL:-https://app.joinhandshake.com}
+    volumes:
+      # Writable here — this is the one service that produces the session file.
+      - ./services/search_listings/.auth:/srv/services/search_listings/.auth
+    stdin_open: true
+    tty: true
+
+volumes:
+  tectonic-cache:

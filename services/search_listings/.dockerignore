@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Live auth cookies — bind-mounted at runtime, never baked into an image.
+.auth/
+
+# Local secrets; compose passes configuration in as environment variables.
+.env
+
+# Diagnostic output (rendered HTML / screenshots may contain personal data).
+debug/

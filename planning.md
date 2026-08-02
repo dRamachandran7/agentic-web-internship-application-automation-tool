@@ -16,24 +16,25 @@ Each of these tools is explained in more detail in TOOLS.md
 
 - analyze_listing: an agent examines the listing and the company to decide what values and expertise the hiring company is looking for.
 
-- personalize_resume: an agent uses the analysis from the previous tool to edit the user's resume to highlight specific skills in more detail to fit the listing
+- personalize_resume: an agent uses the analysis from the previous tool to edit the user's resume to highlight specific skills in more detail to fit the listing, returning it as both LaTeX and a compiled PDF for the user to download
 
-- submit_application: the updated resume is used to submit an application to the current job.
-
+There is no automated submission step. Apply forms differ too much
+listing-to-listing (different fields, some redirect to a different ATS
+entirely) to automate reliably, so the pipeline stops at handing the user a
+personalized resume per listing and lets them submit it themselves.
 
 ## Architecture
 
 For all llm calls, we will be using the Groq API, specifically the Llama 3.3 70B model.
 
-The flow from user input to a submitted application is as follows:
+The flow from user input to a downloadable personalized resume per listing is as follows:
 
 ```mermaid
 flowchart TD
-    A[React frontend] -->|resume + preferences| S[search_listings]
+    A[React/Next.js frontend] -->|resume + preferences| S[search_listings]
     S -->|scrapes web,gets listings| D[analyze_listing]
     D -->|analysis message| P[personalize_resume]
-    P -->|edited resume| F[submit_application]
-    F --> G[Application submitted]
+    P -->|LaTeX + PDF per listing| A
 ```
 
 

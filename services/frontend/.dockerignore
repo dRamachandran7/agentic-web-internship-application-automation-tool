@@ -1,0 +1,7 @@
+node_modules/
+.next/
+tsconfig.tsbuildinfo
+
+# Local overrides; compose passes configuration in as environment variables.
+.env
+.env.local
