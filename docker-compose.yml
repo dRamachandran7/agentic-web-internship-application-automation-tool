@@ -54,12 +54,14 @@ services:
     healthcheck:
       # Also asserts the Groq key is configured, so a missing GROQ_API_KEY shows
       # up as an unhealthy service at startup (and holds the frontend back)
-      # rather than as a 502 midway through a run.
+      # rather than as a 502 midway through a run. The failure message is
+      # printed because `up` only reports "container is unhealthy" — the reason
+      # is recoverable via `docker inspect --format '{{json .State.Health}}'`.
       test:
         - CMD
         - python
         - -c
-        - import json,urllib.request,sys; sys.exit(0 if json.load(urllib.request.urlopen('http://127.0.0.1:8002/health', timeout=3))['groq_api_key_present'] else 1)
+        - import json,urllib.request,sys; ok=json.load(urllib.request.urlopen('http://127.0.0.1:8002/health', timeout=3))['groq_api_key_present']; print('ok' if ok else 'GROQ_API_KEY is empty. Compose reads the .env file at the REPO ROOT, not the per-service ones. Run cp .env.example .env and fill it in.'); sys.exit(0 if ok else 1)
       interval: 10s
       timeout: 5s
       retries: 5
@@ -83,7 +85,7 @@ services:
         - CMD
         - python
         - -c
-        - import json,urllib.request,sys; sys.exit(0 if json.load(urllib.request.urlopen('http://127.0.0.1:8003/health', timeout=3))['groq_api_key_present'] else 1)
+        - import json,urllib.request,sys; ok=json.load(urllib.request.urlopen('http://127.0.0.1:8003/health', timeout=3))['groq_api_key_present']; print('ok' if ok else 'GROQ_API_KEY is empty. Compose reads the .env file at the REPO ROOT, not the per-service ones. Run cp .env.example .env and fill it in.'); sys.exit(0 if ok else 1)
       interval: 10s
       timeout: 5s
       retries: 5
