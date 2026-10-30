@@ -2,7 +2,7 @@
 
 Takes the user's resume as raw LaTeX source and the `values` a listing is
 looking for (analyze_listing's output), makes one Groq call
-(`llama-3.3-70b-versatile`, available on Groq's free tier) to edit the LaTeX
+(`openai/gpt-oss-120b` on Groq) to edit the LaTeX
 directly — rephrasing and reordering existing bullets/skills to foreground
 what the listing cares about, without inventing new experience — then
 compiles the result to PDF with Tectonic. Third and final stage of the

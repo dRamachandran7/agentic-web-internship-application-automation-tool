@@ -20,8 +20,9 @@ class Settings(BaseSettings):
 
     # --- Groq ---
     groq_api_key: str = ""
-    # llama-3.3-70b-versatile is available on Groq's free tier.
-    groq_model: str = "llama-3.3-70b-versatile"
+    # openai/gpt-oss-120b: best of the Groq models in evals/ (2026-10-30);
+    # llama-3.3-70b-versatile was retired.
+    groq_model: str = "openai/gpt-oss-120b"
 
     # --- Storage ---
     db_path: Path = _DEFAULT_DB

@@ -25,7 +25,7 @@ personalized resume per listing and lets them submit it themselves.
 
 ## Architecture
 
-For all llm calls, we will be using the Groq API, specifically the Llama 3.3 70B model.
+For all llm calls, we will be using the Groq API, specifically the Llama 3.3 70B model. (Since replaced by `openai/gpt-oss-120b` after Groq retired Llama 3.3 70B; see evals/README.md.)
 
 The flow from user input to a downloadable personalized resume per listing is as follows:
 
