@@ -1,0 +1,43 @@
+% Fictional eval fixture: a plain article-class resume with a Summary section.
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{enumitem}
+\setlist{nosep}
+\pagestyle{empty}
+
+\begin{document}
+
+{\LARGE\textbf{Priya Natarajan}}\\
+priya.n@example.com \textbullet{} New York, NY
+
+\section*{Summary}
+Economics and statistics student who enjoys turning messy data into clear answers for decision makers.
+
+\section*{Education}
+\textbf{Metro College}, B.A. Economics, minor in Statistics \hfill Expected May 2027
+
+\section*{Experience}
+\textbf{Finance Intern}, Hudson Credit Union \hfill Jun. 2025 -- Aug. 2025
+\begin{itemize}
+  \item Maintained Excel models tracking loan delinquency \& prepared monthly summaries for the CFO
+  \item Pulled member data with SQL for a branch-performance review
+  \item Built a pivot-table workbook that the team still uses to reconcile accounts
+\end{itemize}
+
+\textbf{Teaching Assistant, Intro Statistics}, Metro College \hfill Jan. 2025 -- Present
+\begin{itemize}
+  \item Held weekly office hours for 60+ students
+  \item Graded problem sets on hypothesis testing and regression
+\end{itemize}
+
+\section*{Projects}
+\textbf{Subway Ridership Dashboard} \hfill Spring 2025
+\begin{itemize}
+  \item Created a Tableau dashboard of post-2020 ridership recovery by borough
+  \item Cleaned the public MTA dataset in Python with pandas
+\end{itemize}
+
+\section*{Skills}
+Excel (pivot tables, VLOOKUP), SQL, Tableau, Python (pandas), Stata, public speaking
+
+\end{document}

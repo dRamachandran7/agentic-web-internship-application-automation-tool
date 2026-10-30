@@ -1,0 +1,15 @@
+# Service code the evals import in-process
+pydantic>=2.6
+pydantic-settings>=2.2
+python-dotenv>=1.0
+groq>=0.15
+# Other model backends
+anthropic>=0.80
+openai>=1.40
+# e2e
+fastapi>=0.110
+uvicorn[standard]>=0.29
+httpx>=0.27
+# tests
+pytest>=8
+pytest-asyncio>=0.23

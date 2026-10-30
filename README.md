@@ -73,6 +73,12 @@ debugging — the frontend reaches them over the compose network by service name
 Scraped listings and their analyses persist in `data/app.db`, bind-mounted from
 the repo root, so they survive `docker compose down`.
 
+## Evals
+
+`evals/` scores each LLM stage against labeled fixtures, compares models
+(Groq, Claude, any OpenAI-compatible endpoint), and contract-tests the
+orchestrator without Handshake. See [evals/README.md](evals/README.md).
+
 ## Troubleshooting
 
 **A run fails immediately at "Searching listings".** The saved Handshake session

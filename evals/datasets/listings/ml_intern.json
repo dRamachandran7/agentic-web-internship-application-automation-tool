@@ -1,0 +1,19 @@
+{
+  "id": "ml_intern",
+  "tags": ["typical", "ml"],
+  "input": {
+    "listingId": "eval-ml_intern",
+    "title": "Machine Learning Intern - Perception",
+    "company": "Bluefin Robotics",
+    "location": "Pittsburgh, PA",
+    "url": "https://example.invalid/jobs/1002",
+    "descriptionText": "Bluefin Robotics makes autonomous inspection robots for underwater infrastructure. Our perception team is looking for a Machine Learning Intern for Summer 2026.\n\nResponsibilities:\n* Train and evaluate deep learning models for object detection on sonar and camera data\n* Build data loading and augmentation pipelines\n* Run experiments and present results to the team weekly\n\nMinimum qualifications:\n* Strong Python programming skills\n* Hands-on experience with PyTorch\n* Solid foundation in linear algebra and probability/statistics\n\nPreferred qualifications:\n* Coursework or projects in computer vision\n* Experience with ROS\n* C++ experience\n\nWe move fast and expect interns to take initiative. Curiosity and scientific rigor matter more to us than any specific background."
+  },
+  "gold": {
+    "required_skills": [["Python"], ["PyTorch"], ["linear algebra"], ["probability/statistics", "statistics", "probability", "probability and statistics"]],
+    "preferred_skills": [["computer vision"], ["ROS", "Robot Operating System"], ["C++"]],
+    "values": ["fast-paced", "initiative", "curiosity", "scientific rigor"],
+    "summary": "Perception ML internship training PyTorch object-detection models on sonar and camera data."
+  },
+  "must_not_include": ["TensorFlow", "Java", "SQL"]
+}

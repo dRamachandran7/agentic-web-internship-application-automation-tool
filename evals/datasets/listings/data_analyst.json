@@ -1,0 +1,19 @@
+{
+  "id": "data_analyst",
+  "tags": ["typical", "data"],
+  "input": {
+    "listingId": "eval-data_analyst",
+    "title": "Data Analyst Intern",
+    "company": "Harbor Capital Partners",
+    "location": "New York, NY",
+    "url": "https://example.invalid/jobs/1004",
+    "descriptionText": "Harbor Capital Partners is a mid-market private equity firm. Our portfolio analytics group is hiring a Summer Data Analyst Intern.\n\nIn this role you will build Tableau dashboards tracking portfolio company KPIs, pull data with SQL, and prepare analyses in Excel for investment committee memos.\n\nRequirements\n• Advanced Excel (pivot tables, lookups)\n• SQL\n• Tableau or a similar BI tool\n• Excellent written and verbal communication\n\nPreferred\n• Python (pandas)\n• Familiarity with financial modeling or accounting concepts\n\nWe look for analysts who are detail-oriented, intellectually honest, and comfortable presenting to senior stakeholders."
+  },
+  "gold": {
+    "required_skills": [["Excel", "Advanced Excel", "pivot tables"], ["SQL"], ["Tableau", "BI tool"], ["communication", "written and verbal communication"]],
+    "preferred_skills": [["Python", "pandas", "Python (pandas)"], ["financial modeling", "accounting", "accounting concepts"]],
+    "values": ["detail-oriented", "intellectual honesty", "presenting"],
+    "summary": "Private equity data analyst internship building Tableau KPI dashboards with SQL and Excel."
+  },
+  "must_not_include": ["R", "Power BI", "Java"]
+}

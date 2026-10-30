@@ -1,0 +1,19 @@
+{
+  "id": "sparse",
+  "tags": ["edge", "sparse", "hallucination"],
+  "input": {
+    "listingId": "eval-sparse",
+    "title": "Summer Intern",
+    "company": "Quantum Leaf Co.",
+    "location": "",
+    "url": "https://example.invalid/jobs/1005",
+    "descriptionText": "Join our team this summer! Interns help out with a variety of projects across the company. Must be currently enrolled in a degree program."
+  },
+  "gold": {
+    "required_skills": [["enrolled in a degree program", "currently enrolled in a degree program", "degree program", "enrolled student"]],
+    "preferred_skills": [],
+    "values": [],
+    "summary": "General summer internship supporting projects across the company."
+  },
+  "must_not_include": ["Python", "Java", "SQL", "Excel", "JavaScript", "communication skills", "leadership"]
+}

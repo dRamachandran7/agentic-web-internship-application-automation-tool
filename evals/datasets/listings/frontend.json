@@ -1,0 +1,19 @@
+{
+  "id": "frontend",
+  "tags": ["typical", "frontend"],
+  "input": {
+    "listingId": "eval-frontend",
+    "title": "Frontend Engineering Intern",
+    "company": "Lumen Health",
+    "location": "Remote (US)",
+    "url": "https://example.invalid/jobs/1003",
+    "descriptionText": "Lumen Health is building a patient portal used by 200+ clinics. Join our web team for a 12-week paid internship ($32/hr).\n\nYou will build accessible, responsive UI components and help migrate legacy pages to our modern stack.\n\nYou must have:\n- Experience building web apps with JavaScript and React\n- Strong HTML and CSS fundamentals\n\nBonus points:\n- TypeScript\n- Knowledge of web accessibility standards (WCAG)\n- Testing with Jest or React Testing Library\n\nWe're empathetic to patients and to each other. We value attention to detail and inclusive design."
+  },
+  "gold": {
+    "required_skills": [["JavaScript"], ["React"], ["HTML"], ["CSS"]],
+    "preferred_skills": [["TypeScript"], ["WCAG", "web accessibility", "accessibility", "web accessibility standards"], ["Jest", "React Testing Library", "testing"]],
+    "values": ["empathy", "attention to detail", "inclusive design"],
+    "summary": "Paid frontend internship building accessible React UI components for a clinic patient portal."
+  },
+  "must_not_include": ["Python", "Angular", "Vue"]
+}

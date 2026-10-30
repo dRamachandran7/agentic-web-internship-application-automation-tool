@@ -1,0 +1,19 @@
+{
+  "id": "noisy_scrape",
+  "tags": ["edge", "noisy"],
+  "input": {
+    "listingId": "eval-noisy_scrape",
+    "title": "Software Developer Intern (Java)",
+    "company": "Meridian Logistics",
+    "location": "Columbus, OH",
+    "url": "https://example.invalid/jobs/1007",
+    "descriptionText": "Skip to main content\nJobs\nEvents\nEmployers\nInbox\nCareer Center\nApply\nSave\nShare\nPosted 3 days ago · Apply by May 1\nInternship · Paid · On-site\n\nAt a glance\nMeridian Logistics optimizes freight routing for 4,000 carriers.\n\nThe role\nYou'll join the routing team to build features in our Java services.\n\nWhat we're looking for\n- Java\n- Object-oriented programming\n- Data structures and algorithms\n- Spring Boot experience is a plus\n\nMeridian Logistics is an Equal Opportunity Employer. All qualified applicants will receive consideration for employment without regard to race, color, religion, sex, national origin, disability, or veteran status.\n\nSimilar jobs\nBackend Intern - Acme Corp\nData Engineering Intern - Foo Inc\nReport this job"
+  },
+  "gold": {
+    "required_skills": [["Java"], ["object-oriented programming", "OOP"], ["data structures and algorithms", "data structures", "algorithms"]],
+    "preferred_skills": [["Spring Boot", "Spring"]],
+    "values": [],
+    "summary": "Java developer internship building freight-routing features on the routing team."
+  },
+  "must_not_include": ["Acme Corp", "Foo Inc", "Data Engineering"]
+}

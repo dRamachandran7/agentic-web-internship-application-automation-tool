@@ -1,0 +1,134 @@
+%-------------------------
+% Fictional eval fixture in the style of Jake's Resume (MIT licensed template).
+%-------------------------
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Jordan Lee} \\ \vspace{1pt}
+    \small 555-010-0199 $|$ \href{mailto:jordan.lee@example.com}{\underline{jordan.lee@example.com}} $|$
+    \href{https://github.com/example}{\underline{github.com/example}}
+\end{center}
+
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {State University}{Columbus, OH}
+      {Bachelor of Science in Computer Science, GPA 3.7}{Aug. 2023 -- May 2027}
+  \resumeSubHeadingListEnd
+
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Software Engineering Intern}{May 2025 -- Aug. 2025}
+      {Pinecrest Software}{Dayton, OH}
+      \resumeItemListStart
+        \resumeItem{Built internal tools in Python and Flask used by the support team to look up customer orders}
+        \resumeItem{Wrote SQL queries to generate weekly reports, cutting manual reporting time by 40\%}
+        \resumeItem{Containerized two services with Docker for consistent local development}
+        \resumeItem{Participated in code reviews and maintained unit tests with pytest}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Undergraduate Research Assistant}{Jan. 2024 -- Present}
+      {State University R\&D Lab}{Columbus, OH}
+      \resumeItemListStart
+        \resumeItem{Cleaned and analyzed sensor datasets in Python (pandas, NumPy)}
+        \resumeItem{Presented findings at the weekly lab meeting}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{CampusEats} $|$ \emph{React, Flask, PostgreSQL}}{Sep. 2024 -- Dec. 2024}
+          \resumeItemListStart
+            \resumeItem{Developed a full-stack web app for ordering from campus dining halls}
+            \resumeItem{Designed the backend endpoints and PostgreSQL schema}
+            \resumeItem{Deployed with Docker on a university server}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\textbf{Pathfinder} $|$ \emph{C++}}{Feb. 2024 -- Apr. 2024}
+          \resumeItemListStart
+            \resumeItem{Implemented A* and Dijkstra search on grid maps for a data structures course}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: C++, JavaScript, Python, SQL, HTML/CSS} \\
+     \textbf{Frameworks}{: React, Flask, pytest} \\
+     \textbf{Developer Tools}{: Git, Docker, VS Code, Linux} \\
+     \textbf{Libraries}{: pandas, NumPy}
+    }}
+ \end{itemize}
+
+\end{document}

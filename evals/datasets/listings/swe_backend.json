@@ -1,0 +1,19 @@
+{
+  "id": "swe_backend",
+  "tags": ["typical", "swe"],
+  "input": {
+    "listingId": "eval-swe_backend",
+    "title": "Software Engineering Intern, Backend",
+    "company": "Northwind Analytics",
+    "location": "Chicago, IL (Hybrid)",
+    "url": "https://example.invalid/jobs/1001",
+    "descriptionText": "About the role\nNorthwind Analytics builds data pipelines that help regional retailers forecast demand. As a Backend Software Engineering Intern you will work on the services that ingest point-of-sale data and expose it to our dashboards.\n\nWhat you'll do\n- Design and build REST APIs in Python that serve forecasting results\n- Write and optimize SQL queries against large transactional datasets\n- Write unit and integration tests and participate in code review\n- Collaborate with data scientists to productionize models\n\nRequired qualifications\n- Currently pursuing a BS or MS in Computer Science or a related field\n- Proficiency in Python\n- Experience with SQL and relational databases\n- Familiarity with REST API design\n- Comfortable using Git for version control\n\nNice to have\n- Experience with Docker\n- Exposure to AWS (Lambda, S3)\n- Experience with PostgreSQL\n\nOur culture\nWe are a small, collaborative team. We value ownership: interns ship real features to production. We care about clear written communication and a bias toward learning."
+  },
+  "gold": {
+    "required_skills": [["Python"], ["SQL", "relational databases"], ["REST APIs", "REST API design", "REST", "RESTful APIs"], ["Git", "version control"], ["Computer Science degree", "BS or MS in Computer Science", "pursuing a BS or MS in Computer Science", "Computer Science"]],
+    "preferred_skills": [["Docker"], ["AWS", "AWS Lambda", "S3", "Lambda"], ["PostgreSQL", "Postgres"]],
+    "values": ["collaborative", "ownership", "communication", "learning"],
+    "summary": "Backend internship building Python REST APIs and SQL-backed data services for retail demand forecasting."
+  },
+  "must_not_include": ["Java", "Kubernetes", "React"]
+}
